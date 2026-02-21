@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Values-Aligned AI — A Short Course with Daniel Thorson & Michal Tolk</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #faf8f4;
+            color: #2a2520;
+            font-family: 'Lora', Georgia, serif;
+            font-weight: 400;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #8a7a5a;
+            margin-bottom: 1.5rem;
+        }
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 400;
+            line-height: 1.25;
+            color: #1a1510;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            font-style: italic;
+            font-size: 1.15rem;
+            color: #6a5d4a;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c9a96e, transparent);
+            margin: 2rem auto;
+        }
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        p { margin-bottom: 1.3rem; font-size: 1.05rem; }
+        strong { font-weight: 600; color: #1a1510; }
+        em { font-style: italic; }
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: #1a1510;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #f3efe8;
+            border-radius: 8px;
+        }
+        .detail {
+            text-align: center;
+        }
+        .detail-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #8a7a5a;
+            margin-bottom: 0.3rem;
+        }
+        .detail-value {
+            font-size: 1.05rem;
+            color: #3a3025;
+        }
+        ul {
+            margin: 1rem 0 1.5rem 1.2rem;
+            list-style: none;
+        }
+        ul li {
+            margin-bottom: 0.7rem;
+            font-size: 1.05rem;
+            padding-left: 0.5rem;
+        }
+        ul li::before {
+            content: "✧ ";
+            color: #c9a96e;
+        }
+        blockquote {
+            border-left: 3px solid #c9a96e;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #5a5045;
+            background: #f5f0ea;
+            border-radius: 0 6px 6px 0;
+        }
+        .bios {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .bio {
+            text-align: center;
+        }
+        .bio-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1510;
+            margin-bottom: 0.3rem;
+        }
+        .bio-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #8a7a5a;
+            margin-bottom: 0.8rem;
+        }
+        .bio p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .cta-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #3a3025;
+            color: #f5f0ea;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .cta-btn:hover {
+            background: #c9a96e;
+            color: #1a1510;
+        }
+        .price {
+            margin-top: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #8a7a5a;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #a09585;
+        }
+        .footer a {
+            color: #8a6d3b;
+            text-decoration: none;
+            border-bottom: 1px solid #c9a96e;
+        }
+        @media (max-width: 580px) {
+            h1 { font-size: 2rem; }
+            .details-grid { grid-template-columns: 1fr; }
+            .bios { grid-template-columns: 1fr; }
+            .hero { padding: 3rem 1.5rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="eyebrow">A short course with Daniel Thorson & Michal Tolk</div>
+        <h1>Values-Aligned AI</h1>
+        <div class="subtitle">Building systems that serve your life — not the other way around.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container">
+
+        <p>AI is changing everything. But most of what's being taught about AI is about <strong>productivity</strong> — doing more, faster, with less friction.</p>
+
+        <p>We're interested in a different question: <em>What if AI could help you live a more beautiful life?</em></p>
+
+        <p>Not a more optimized life. Not a more efficient life. A life more aligned with what you actually care about — your values, your relationships, your health, your creative work, your spiritual practice.</p>
+
+        <p>We've spent the last year building AI systems for ourselves — not as a tech experiment, but as a genuine practice of aligning our tools with our deepest intentions. What we've discovered has surprised us. These systems don't just save time. They <strong>mirror back what matters</strong>. They surface what you're avoiding. They hold the threads you keep dropping.</p>
+
+        <p>In this short course, we'll share what we've learned and give you the space to build your own.</p>
+
+        <div class="details-grid">
+            <div class="detail">
+                <div class="detail-label">Format</div>
+                <div class="detail-value">Two 90-minute sessions</div>
+            </div>
+            <div class="detail">
+                <div class="detail-label">Duration</div>
+                <div class="detail-value">Two weeks</div>
+            </div>
+            <div class="detail">
+                <div class="detail-label">Cohort</div>
+                <div class="detail-value">~12 people</div>
+            </div>
+            <div class="detail">
+                <div class="detail-label">Setting</div>
+                <div class="detail-value">Live on Zoom</div>
+            </div>
+        </div>
+
+        <h2>What We'll Cover</h2>
+
+        <p><strong>Session 1: The Vision</strong></p>
+        <ul>
+            <li>Why most AI advice misses what matters</li>
+            <li>What "values-aligned" actually means in practice</li>
+            <li>How we built systems that reflect our values — not just our to-do lists</li>
+            <li>Identifying your own values, desires, and intentions as design inputs</li>
+            <li>Hands-on: beginning to design your own system</li>
+        </ul>
+
+        <p><strong>Session 2: The Build</strong></p>
+        <ul>
+            <li>Working session: building and refining your system</li>
+            <li>Common patterns and pitfalls</li>
+            <li>How to keep a system alive and evolving</li>
+            <li>Reflection: what shifted? What's possible now?</li>
+        </ul>
+
+        <blockquote>
+            <p>This isn't a course about prompts or productivity hacks. It's about learning to use the most powerful tools ever created in service of what you actually love.</p>
+        </blockquote>
+
+        <h2>Who This Is For</h2>
+
+        <p>You don't need to be technical. You don't need prior AI experience. You just need to care about living deliberately — and be curious about whether these tools could support that.</p>
+
+        <p>This course is especially for:</p>
+        <ul>
+            <li>Coaches, healers, and practitioners who want AI that fits their values</li>
+            <li>Writers, creatives, and entrepreneurs building a life around meaning</li>
+            <li>Anyone who feels the pull of AI but doesn't want to lose their soul to it</li>
+            <li>Couples or partners who want to build shared systems together</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h2>Your Guides</h2>
+
+        <div class="bios">
+            <div class="bio">
+                <div class="bio-name">Daniel Thorson</div>
+                <div class="bio-role">Writer · Coach · The Intimate Mirror</div>
+                <p>Daniel writes about meaning, transformation, and intimacy at the edge of a new world. He's built AI systems that support his coaching practice, writing life, and daily contemplative rhythm.</p>
+            </div>
+            <div class="bio">
+                <div class="bio-name">Michal Tolk</div>
+                <div class="bio-role">Somatic Healer · Coach · Cries in the Wilderness</div>
+                <p>Michal is a somatic practitioner, spiritual counselor, and embodiment coach. She's built AI systems that support her practice, her creative life, and her commitment to living in sacred alignment.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="#" class="cta-btn">Reserve Your Spot</a>
+            <div class="price">$500 · Limited to 12 participants</div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <a href="https://danielthorson.substack.com">The Intimate Mirror</a> · <a href="https://criesinthewilderness.substack.com">Cries in the Wilderness</a>
+    </div>
+
+</body>
+</html>
