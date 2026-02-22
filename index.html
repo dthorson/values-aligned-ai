@@ -41,14 +41,20 @@
             font-style: italic;
             font-size: 1.15rem;
             color: #6a5d4a;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1rem;
             line-height: 1.7;
+        }
+        .hero-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #8a7a5a;
+            line-height: 1.6;
         }
         .divider {
             width: 60px;
             height: 1px;
             background: linear-gradient(90deg, transparent, #c9a96e, transparent);
-            margin: 2rem auto;
+            margin: 2.5rem auto;
         }
         .container {
             max-width: 640px;
@@ -65,51 +71,125 @@
             margin-bottom: 1rem;
             color: #1a1510;
         }
+        h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.6rem;
+            color: #1a1510;
+        }
+        .principle {
+            border-left: 3px solid #c9a96e;
+            padding: 1.2rem 1.5rem;
+            margin: 1.5rem 0;
+            background: #f5f0ea;
+            border-radius: 0 6px 6px 0;
+        }
+        .principle-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #c9a96e;
+            margin-bottom: 0.4rem;
+        }
+        .principle p {
+            margin-bottom: 0;
+            font-style: italic;
+            color: #3a3025;
+        }
         .details-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
             margin: 2rem 0;
-            padding: 2rem;
+            padding: 1.5rem;
             background: #f3efe8;
             border-radius: 8px;
-        }
-        .detail {
             text-align: center;
         }
         .detail-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.14em;
             color: #8a7a5a;
             margin-bottom: 0.3rem;
         }
         .detail-value {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: #3a3025;
         }
+        .session-block {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            border: 1px solid #e8e0d0;
+            border-radius: 8px;
+            background: #fdfbf8;
+        }
+        .session-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #c9a96e;
+            margin-bottom: 0.5rem;
+        }
+        .session-block h3 {
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+        }
         ul {
-            margin: 1rem 0 1.5rem 1.2rem;
+            margin: 0.8rem 0 0.5rem 1rem;
             list-style: none;
         }
         ul li {
-            margin-bottom: 0.7rem;
-            font-size: 1.05rem;
-            padding-left: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            padding-left: 0.3rem;
         }
         ul li::before {
             content: "✧ ";
             color: #c9a96e;
         }
-        blockquote {
-            border-left: 3px solid #c9a96e;
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
+        .homework-note {
+            margin-top: 1rem;
+            padding: 0.8rem 1rem;
+            background: #f0ebe0;
+            border-radius: 4px;
+            font-size: 0.9rem;
             font-style: italic;
             color: #5a5045;
-            background: #f5f0ea;
-            border-radius: 0 6px 6px 0;
+        }
+        .pathways {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .pathway {
+            padding: 1.5rem;
+            border: 1px solid #e8e0d0;
+            border-radius: 8px;
+        }
+        .pathway-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #8a7a5a;
+            margin-bottom: 0.5rem;
+        }
+        .pathway h3 {
+            font-size: 1rem;
+            margin-top: 0;
+            margin-bottom: 0.6rem;
+        }
+        .pathway p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: #5a5045;
+            line-height: 1.6;
         }
         .bios {
             display: grid;
@@ -117,28 +197,18 @@
             gap: 2rem;
             margin: 2rem 0;
         }
-        .bio {
-            text-align: center;
-        }
-        .bio-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1a1510;
-            margin-bottom: 0.3rem;
-        }
-        .bio-role {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            color: #8a7a5a;
-            margin-bottom: 0.8rem;
-        }
-        .bio p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
+        .bio { text-align: center; }
+        .bio-name { font-size: 1.05rem; font-weight: 600; color: #1a1510; margin-bottom: 0.2rem; }
+        .bio-role { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #8a7a5a; margin-bottom: 0.8rem; }
+        .bio p { font-size: 0.92rem; line-height: 1.7; color: #5a5045; }
         .cta-section {
             text-align: center;
-            padding: 3rem 0;
+            padding: 3rem 0 1rem;
+        }
+        .cta-section p {
+            font-style: italic;
+            color: #6a5d4a;
+            margin-bottom: 2rem;
         }
         .cta-btn {
             display: inline-block;
@@ -152,112 +222,134 @@
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 4px;
+            cursor: pointer;
+            border: none;
             transition: all 0.3s ease;
         }
-        .cta-btn:hover {
-            background: #c9a96e;
-            color: #1a1510;
-        }
-        .price {
+        .cta-btn:hover { background: #c9a96e; color: #1a1510; }
+        .price-note {
             margin-top: 1rem;
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #8a7a5a;
         }
         .footer {
             text-align: center;
             padding: 2rem;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: #a09585;
         }
-        .footer a {
-            color: #8a6d3b;
-            text-decoration: none;
-            border-bottom: 1px solid #c9a96e;
-        }
+        .footer a { color: #8a6d3b; text-decoration: none; border-bottom: 1px solid #c9a96e; }
         @media (max-width: 580px) {
             h1 { font-size: 2rem; }
-            .details-grid { grid-template-columns: 1fr; }
+            .details-grid { grid-template-columns: 1fr 1fr; }
+            .pathways { grid-template-columns: 1fr; }
             .bios { grid-template-columns: 1fr; }
-            .hero { padding: 3rem 1.5rem 2rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="hero">
-        <div class="eyebrow">A short course with Daniel Thorson & Michal Tolk</div>
+        <div class="eyebrow">A short course — Daniel Thorson & Michal Tolk</div>
         <h1>Values-Aligned AI</h1>
-        <div class="subtitle">Building systems that serve your life — not the other way around.</div>
+        <div class="subtitle">How to think about and build with AI from first principles — so that the tools serve your life, not the other way around.</div>
     </div>
 
     <div class="divider"></div>
 
     <div class="container">
 
-        <p>AI is changing everything. But most of what's being taught about AI is about <strong>productivity</strong> — doing more, faster, with less friction.</p>
+        <p>Most AI advice is about doing more, faster. This course is about something different.</p>
 
-        <p>We're interested in a different question: <em>What if AI could help you live a more beautiful life?</em></p>
+        <p>AI tools change constantly. What worked six months ago is already outdated. If you build your practice around any specific tool or system, you'll be rebuilding it every year. What doesn't change is how you think — and how clearly you can articulate what you actually want.</p>
 
-        <p>Not a more optimized life. Not a more efficient life. A life more aligned with what you actually care about — your values, your relationships, your health, your creative work, your spiritual practice.</p>
+        <p>This is a course about that: <strong>developing a first-principles relationship with AI</strong> that transcends any particular platform, so that whatever comes next, you're ready for it.</p>
 
-        <p>We've spent the last year building AI systems for ourselves — not as a tech experiment, but as a genuine practice of aligning our tools with our deepest intentions. What we've discovered has surprised us. These systems don't just save time. They <strong>mirror back what matters</strong>. They surface what you're avoiding. They hold the threads you keep dropping.</p>
+        <p>We've each built AI systems for our own lives — not as tech experiments, but as genuine practices of aligning our tools with our deepest intentions. We've learned that the most powerful thing you can do is not learn a better prompt. It's <strong>learn to be clearer about what you actually desire</strong>.</p>
 
-        <p>In this short course, we'll share what we've learned and give you the space to build your own.</p>
+        <div class="divider"></div>
+
+        <h2>Two Principles</h2>
+
+        <div class="principle">
+            <div class="principle-num">Principle One</div>
+            <p>Go up a layer of abstraction. Don't learn the tool — learn to think at the level above it. That's what makes you adaptable as everything changes.</p>
+        </div>
+
+        <div class="principle">
+            <div class="principle-num">Principle Two</div>
+            <p>Get the AI to ask you questions. The AI's job is not to give you answers — it's to evoke your clarity. Learning to use it this way transforms the whole relationship.</p>
+        </div>
+
+        <p>Underneath both of these is one core skill: <em>speaking the truth of what you want</em>. The more clearly you can articulate your actual desires — not what you think you should want, but what you genuinely long for — the more powerfully AI can serve you. Clarity is the leverage point.</p>
+
+        <div class="divider"></div>
+
+        <h2>What We'll Do Together</h2>
 
         <div class="details-grid">
-            <div class="detail">
+            <div>
                 <div class="detail-label">Format</div>
-                <div class="detail-value">Two 90-minute sessions</div>
+                <div class="detail-value">2 live sessions</div>
             </div>
-            <div class="detail">
-                <div class="detail-label">Duration</div>
-                <div class="detail-value">Two weeks</div>
+            <div>
+                <div class="detail-label">Each session</div>
+                <div class="detail-value">90 minutes</div>
             </div>
-            <div class="detail">
-                <div class="detail-label">Cohort</div>
+            <div>
+                <div class="detail-label">Cohort size</div>
                 <div class="detail-value">~12 people</div>
             </div>
-            <div class="detail">
-                <div class="detail-label">Setting</div>
-                <div class="detail-value">Live on Zoom</div>
+            <div>
+                <div class="detail-label">Investment</div>
+                <div class="detail-value">$500</div>
             </div>
         </div>
 
-        <h2>What We'll Cover</h2>
+        <div class="session-block">
+            <div class="session-label">Session One</div>
+            <h3>The View</h3>
+            <ul>
+                <li>The first-principles framework — how to think about AI at the level above the tools</li>
+                <li>Why clarity of desire is the core skill</li>
+                <li>A live experiment: using AI in a specific way to evoke your own clarity</li>
+                <li>Introduction to the two recommended pathways</li>
+            </ul>
+            <div class="homework-note">
+                <strong>Homework:</strong> Build a first pass at a "life architecture system" — a structured space that reflects your values, desires, and intentions, and that you can bring into conversation with AI.
+            </div>
+        </div>
 
-        <p><strong>Session 1: The Vision</strong></p>
-        <ul>
-            <li>Why most AI advice misses what matters</li>
-            <li>What "values-aligned" actually means in practice</li>
-            <li>How we built systems that reflect our values — not just our to-do lists</li>
-            <li>Identifying your own values, desires, and intentions as design inputs</li>
-            <li>Hands-on: beginning to design your own system</li>
-        </ul>
+        <div class="session-block">
+            <div class="session-label">Session Two</div>
+            <h3>Reflection & Troubleshooting</h3>
+            <ul>
+                <li>Share what you built and what you noticed</li>
+                <li>How is the system actually feeling? Where is it working?</li>
+                <li>Troubleshoot together — we learn from each other's friction</li>
+                <li>What's next: keeping the system alive and evolving</li>
+            </ul>
+        </div>
 
-        <p><strong>Session 2: The Build</strong></p>
-        <ul>
-            <li>Working session: building and refining your system</li>
-            <li>Common patterns and pitfalls</li>
-            <li>How to keep a system alive and evolving</li>
-            <li>Reflection: what shifted? What's possible now?</li>
-        </ul>
+        <div class="divider"></div>
 
-        <blockquote>
-            <p>This isn't a course about prompts or productivity hacks. It's about learning to use the most powerful tools ever created in service of what you actually love.</p>
-        </blockquote>
+        <h2>Two Pathways</h2>
 
-        <h2>Who This Is For</h2>
+        <p>This course is systems-agnostic. You don't need any particular tool. But we offer two recommended starting points:</p>
 
-        <p>You don't need to be technical. You don't need prior AI experience. You just need to care about living deliberately — and be curious about whether these tools could support that.</p>
-
-        <p>This course is especially for:</p>
-        <ul>
-            <li>Coaches, healers, and practitioners who want AI that fits their values</li>
-            <li>Writers, creatives, and entrepreneurs building a life around meaning</li>
-            <li>Anyone who feels the pull of AI but doesn't want to lose their soul to it</li>
-            <li>Couples or partners who want to build shared systems together</li>
-        </ul>
+        <div class="pathways">
+            <div class="pathway">
+                <div class="pathway-tag">Accessible · Recommended for most</div>
+                <h3>Notion + Claude</h3>
+                <p>Build your life architecture system in Notion, connected to Claude via MCP. Simple, powerful, and requires no technical setup. This is Michal's approach.</p>
+            </div>
+            <div class="pathway">
+                <div class="pathway-tag">Advanced · For the technically curious</div>
+                <h3>Full Agent Setup</h3>
+                <p>Build or configure a persistent AI agent — a "Claude of your own." We'll help you understand the options, differences, and real risks. This is Daniel's approach.</p>
+            </div>
+        </div>
 
         <div class="divider"></div>
 
@@ -267,24 +359,27 @@
             <div class="bio">
                 <div class="bio-name">Daniel Thorson</div>
                 <div class="bio-role">Writer · Coach · The Intimate Mirror</div>
-                <p>Daniel writes about meaning, transformation, and intimacy at the edge of a new world. He's built AI systems that support his coaching practice, writing life, and daily contemplative rhythm.</p>
+                <p>Daniel writes about meaning, transformation, and intimacy at the edge of a new world. He's built a fully custom AI system for his coaching practice, writing life, and daily contemplative rhythm.</p>
             </div>
             <div class="bio">
                 <div class="bio-name">Michal Tolk</div>
                 <div class="bio-role">Somatic Healer · Coach · Cries in the Wilderness</div>
-                <p>Michal is a somatic practitioner, spiritual counselor, and embodiment coach. She's built AI systems that support her practice, her creative life, and her commitment to living in sacred alignment.</p>
+                <p>Michal is a somatic practitioner, spiritual counselor, and embodiment coach. She's built AI systems that support her practice, her creative work, and her commitment to sacred alignment.</p>
             </div>
         </div>
 
+        <div class="divider"></div>
+
         <div class="cta-section">
-            <a href="#" class="cta-btn">Reserve Your Spot</a>
-            <div class="price">$500 · Limited to 12 participants</div>
+            <p>Space is limited to 12 participants. Dates to be announced.</p>
+            <a href="STRIPE_LINK_HERE" class="cta-btn">Reserve Your Spot — $500</a>
+            <div class="price-note">Secure checkout via Stripe. Full payment reserves your place.</div>
         </div>
 
     </div>
 
     <div class="footer">
-        <a href="https://danielthorson.substack.com">The Intimate Mirror</a> · <a href="https://criesinthewilderness.substack.com">Cries in the Wilderness</a>
+        <a href="https://danielthorson.substack.com">The Intimate Mirror</a> &nbsp;·&nbsp; <a href="https://criesinthewilderness.substack.com">Cries in the Wilderness</a>
     </div>
 
 </body>
