@@ -5,259 +5,379 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Values-Aligned AI — A Short Course with Daniel Thorson & Michal Tolk</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500;600&display=swap');
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            font-size: 16px; /* Baseline for rems */
+        }
+
         body {
             background: #faf8f4;
-            color: #2a2520;
+            color: #352f29; /* Slightly softer for reduced eye strain */
             font-family: 'Lora', Georgia, serif;
             font-weight: 400;
-            line-height: 1.8;
+            line-height: 1.65;
             min-height: 100vh;
+            overflow-x: hidden;
+            
+            /* Typographic Polish */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
+
+        ::selection {
+            background: #e8e0d0;
+            color: #1a1510;
+        }
+
+        /* --- Scroll Animation Classes --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), 
+                        transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; }
+        .delay-4 { transition-delay: 0.6s; }
+
+        /* --- Layout & Spacing --- */
         .hero {
             text-align: center;
-            padding: 5rem 2rem 3rem;
+            padding: 9rem 2rem 5rem; /* Increased top padding for dramatic breathing room */
             max-width: 720px;
             margin: 0 auto;
         }
+        
         .eyebrow {
             font-family: 'Inter', sans-serif;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 0.75rem;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.16em; /* Slightly tighter for precision */
             text-transform: uppercase;
             color: #8a7a5a;
+            margin-bottom: 2rem; /* More space before heading */
+        }
+        
+        h1 {
+            font-size: 3rem; /* Slightly larger */
+            font-weight: 400;
+            line-height: 1.15; /* Tighter leading for large text */
+            letter-spacing: -0.02em; /* Editorial tracking */
+            color: #1a1510;
             margin-bottom: 1.5rem;
         }
-        h1 {
-            font-size: 2.6rem;
-            font-weight: 400;
-            line-height: 1.25;
-            color: #1a1510;
-            margin-bottom: 1rem;
-        }
+        
         .subtitle {
             font-style: italic;
-            font-size: 1.15rem;
+            font-size: 1.25rem; /* Larger for better hierarchy */
             color: #6a5d4a;
             margin-bottom: 2.5rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
+        
         .divider {
-            width: 60px;
+            width: 0px; 
             height: 1px;
             background: linear-gradient(90deg, transparent, #c9a96e, transparent);
-            margin: 2rem auto;
+            margin: 4rem auto; /* More macro whitespace */
+            transition: width 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;
+            opacity: 0;
         }
+        .divider.visible {
+            width: 80px;
+            opacity: 1;
+        }
+        
         .container {
-            max-width: 640px;
+            max-width: 600px; /* Narrowed for optimal reading measure (65-75 chars) */
             margin: 0 auto;
-            padding: 0 2rem 4rem;
+            padding: 0 2rem 5rem;
         }
-        p { margin-bottom: 1.3rem; font-size: 1.05rem; }
+        
+        p { 
+            margin-bottom: 1.6rem; /* More space between paragraphs */
+            font-size: 1.125rem; /* Slightly larger body copy */
+        }
+        
         strong { font-weight: 600; color: #1a1510; }
         em { font-style: italic; }
+        
         h2 {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: 400;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin-top: 5rem; /* Stronger separation of sections */
+            margin-bottom: 2rem;
             color: #1a1510;
         }
+        
         .details-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin: 2rem 0;
-            padding: 2rem;
+            gap: 2rem; /* More internal breathing room */
+            margin: 4rem 0;
+            padding: 3rem; /* Expanded padding */
             background: #f3efe8;
             border-radius: 8px;
         }
+        
         .detail { text-align: center; }
         .detail-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.12em;
             color: #8a7a5a;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.6rem;
         }
-        .detail-value { font-size: 1.05rem; color: #3a3025; }
+        .detail-value { 
+            font-size: 1.125rem; 
+            color: #2a2520; 
+            font-weight: 500;
+        }
+        
         ul {
-            margin: 1rem 0 1.2rem 1.2rem;
+            margin: 2rem 0 2.5rem 1.2rem;
             list-style: none;
         }
         ul li {
-            margin-bottom: 0.7rem;
-            font-size: 1.05rem;
-            padding-left: 0.5rem;
+            margin-bottom: 1rem; /* More space between list items */
+            font-size: 1.125rem;
+            padding-left: 1rem; /* More space between bullet and text */
+            position: relative;
         }
-        ul li::before { content: "✧ "; color: #c9a96e; }
+        ul li::before { 
+            content: "✧"; 
+            color: #c9a96e; 
+            position: absolute;
+            left: -1rem;
+            top: 0;
+        }
+        
         blockquote {
-            border-left: 3px solid #c9a96e;
-            padding: 1rem 1.5rem;
-            margin: 2rem 0;
+            border-left: 2px solid #c9a96e;
+            padding: 2rem 2.5rem; /* More immersive padding */
+            margin: 4rem 0;
+            font-size: 1.2rem; /* Make it a true pull-quote */
+            line-height: 1.5;
             font-style: italic;
-            color: #5a5045;
+            color: #4a4238;
             background: #f5f0ea;
-            border-radius: 0 6px 6px 0;
+            border-radius: 0 8px 8px 0;
+            transition: background 1.2s ease, border-color 1.2s ease;
         }
+        blockquote:hover {
+            background: #fdfbf8;
+            border-left: 2px solid #b5955a;
+        }
+        blockquote p { margin-bottom: 0; font-size: inherit; } /* Override default p margins inside blockquote */
+        
         .bios {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 3rem; /* Wider gap between bios */
+            margin: 3rem 0;
         }
         .bio { text-align: center; }
-        .bio-name { font-size: 1.1rem; font-weight: 600; color: #1a1510; margin-bottom: 0.3rem; }
-        .bio-role { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #8a7a5a; margin-bottom: 0.8rem; }
-        .bio p { font-size: 0.95rem; line-height: 1.7; }
+        .bio-name { font-size: 1.2rem; font-weight: 600; color: #1a1510; margin-bottom: 0.4rem; }
+        .bio-role { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #8a7a5a; margin-bottom: 1.2rem; }
+        .bio p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
+        
         .pricing-block {
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             border: 1px solid #e8e0d0;
             border-radius: 8px;
             overflow: hidden;
+            background: #faf8f4;
         }
+        
         .pricing-tier {
-            padding: 1.5rem 2rem;
+            padding: 2.5rem 2rem; /* Taller pricing cards */
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), 
+                        box-shadow 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        background 0.8s ease;
         }
-        .pricing-tier + .pricing-tier {
-            border-top: 1px solid #e8e0d0;
+        .pricing-tier:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(201, 169, 110, 0.08);
+            z-index: 10;
+            position: relative;
         }
+        .pricing-tier + .pricing-tier { border-top: 1px solid #e8e0d0; }
         .pricing-tier.early-bird { background: #f5f0ea; }
+        .pricing-tier.early-bird:hover { background: #fdfbf8; }
         .pricing-tier.full-price { background: #fdfbf8; }
-        .tier-label {
-            font-family: 'Inter', sans-serif;
-        }
+        .pricing-tier.full-price:hover { background: #ffffff; }
+        
+        .tier-label { font-family: 'Inter', sans-serif; }
         .tier-name {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
             color: #1a1510;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
         .tier-window {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: #8a7a5a;
         }
         .tier-price {
             font-family: 'Lora', serif;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: #c9a96e;
         }
+        
         .cta-section {
             text-align: center;
-            padding: 2.5rem 0;
+            padding: 4rem 0;
         }
+        
         .cta-btn {
             display: inline-block;
-            padding: 1rem 3rem;
+            padding: 1.1rem 3.5rem;
             background: #3a3025;
             color: #f5f0ea;
             font-family: 'Inter', sans-serif;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 0.85rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 4px;
-            transition: all 0.3s ease;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: scale(1);
         }
-        .cta-btn:hover { background: #c9a96e; color: #1a1510; }
-        .tier-btn { margin-top: 1rem; padding: 0.65rem 1.5rem; font-size: 0.78rem; }
+        .cta-btn:hover { 
+            background: #c9a96e; 
+            color: #1a1510; 
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(58, 48, 37, 0.08);
+        }
+        .tier-btn { margin-top: 1rem; padding: 0.8rem 2rem; font-size: 0.8rem; }
+        
         .price-note {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
             color: #8a7a5a;
         }
+        
         .footer {
             text-align: center;
-            padding: 2rem;
-            font-size: 0.82rem;
+            padding: 3rem 2rem 5rem;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
             color: #a09585;
         }
-        .footer a { color: #8a6d3b; text-decoration: none; border-bottom: 1px solid #c9a96e; }
-        @media (max-width: 580px) {
-            h1 { font-size: 2rem; }
-            .details-grid { grid-template-columns: 1fr; }
-            .bios { grid-template-columns: 1fr; }
-            .pricing-tier { flex-direction: column; gap: 0.5rem; text-align: center; }
+        .footer a { 
+            color: #8a6d3b; 
+            text-decoration: none; 
+            border-bottom: 1px solid transparent; 
+            padding-bottom: 2px;
+            transition: border-color 0.4s ease, color 0.4s ease;
+        }
+        .footer a:hover {
+            color: #1a1510;
+            border-bottom: 1px solid #c9a96e;
+        }
+        
+        @media (max-width: 640px) {
+            .hero { padding: 6rem 1.5rem 3rem; }
+            h1 { font-size: 2.4rem; }
+            .container { padding: 0 1.5rem 4rem; }
+            .details-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem; }
+            .bios { grid-template-columns: 1fr; gap: 4rem; }
+            .pricing-tier { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
+            .tier-btn { margin-top: 0.5rem; }
+            blockquote { padding: 1.5rem 2rem; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="hero">
-        <div class="eyebrow">A short course with Daniel Thorson & Michal Tolk</div>
-        <h1>Values-Aligned AI</h1>
-        <div class="subtitle">Building systems that serve your life — not the other way around.</div>
+    <div class="hero fade-up">
+        <div class="eyebrow fade-up delay-1">A short course with Daniel Thorson & Michal Tolk</div>
+        <h1 class="fade-up delay-2">Values-Aligned AI</h1>
+        <div class="subtitle fade-up delay-3">Building systems that serve your life — not the other way around.</div>
     </div>
 
     <div class="divider"></div>
 
     <div class="container">
 
-        <p>Maybe you've heard a lot about AI and felt vaguely like it isn't for you. Like it's a tool for tech people, or productivity obsessives, or people with a very different kind of life than yours.</p>
+        <p class="fade-up">Maybe you've heard a lot about AI and felt vaguely like it isn't for you. Like it's a tool for tech people, or productivity obsessives, or people with a very different kind of life than yours.</p>
 
-        <p>We felt that way too, for a long time.</p>
+        <p class="fade-up">We felt that way too, for a long time.</p>
 
-        <p>What changed for us wasn't finding a better app or a more impressive demo. It was discovering that <em>AI can actually listen</em> — that if you learn to talk to it in a particular way, it reflects back your own thinking with a clarity that's genuinely hard to find elsewhere. It asks good questions. It helps you hear what you actually want.</p>
+        <p class="fade-up">What changed for us wasn't finding a better app or a more impressive demo. It was discovering that <em>AI can actually listen</em> — that if you learn to talk to it in a particular way, it reflects back your own thinking with a clarity that's genuinely hard to find elsewhere. It asks good questions. It helps you hear what you actually want.</p>
 
-        <p>For coaches, healers, writers, and people doing meaningful work in the world, that turns out to be <strong>remarkably useful</strong>. Not for doing more. For living better.</p>
+        <p class="fade-up">For coaches, healers, writers, and people doing meaningful work in the world, that turns out to be <strong>remarkably useful</strong>. Not for doing more. For living better.</p>
 
-        <p>This course is a gentle on-ramp. Two sessions, a small group, two guides who will walk in alongside you. No technical background required. No pressure to become an AI person. Just an honest exploration of whether this tool might support the life you're already trying to live.</p>
+        <p class="fade-up">This course is a gentle on-ramp. Two sessions, a small group, two guides who will walk in alongside you. No technical background required. No pressure to become an AI person. Just an honest exploration of whether this tool might support the life you're already trying to live.</p>
 
-        <div class="details-grid">
-            <div class="detail">
+        <div class="details-grid fade-up">
+            <div class="detail fade-up delay-1">
                 <div class="detail-label">Format</div>
                 <div class="detail-value">Two 90-minute sessions</div>
             </div>
-            <div class="detail">
+            <div class="detail fade-up delay-2">
                 <div class="detail-label">Duration</div>
                 <div class="detail-value">Two weeks</div>
             </div>
-            <div class="detail">
+            <div class="detail fade-up delay-3">
                 <div class="detail-label">Cohort</div>
                 <div class="detail-value">~12 people</div>
             </div>
-            <div class="detail">
+            <div class="detail fade-up delay-4">
                 <div class="detail-label">Setting</div>
                 <div class="detail-value">Live on Zoom</div>
             </div>
         </div>
 
-        <h2>What We'll Do Together</h2>
+        <h2 class="fade-up">What We'll Do Together</h2>
 
-        <p><strong>Session 1: Finding Your Way In</strong></p>
-        <ul>
-            <li>A few simple principles for orienting to AI — how to think about context, how to let the conversation clarify what you're after, why speaking out loud often works better than typing</li>
+        <p class="fade-up"><strong>Session 1: Finding Your Way In</strong></p>
+        <ul class="fade-up">
+            <li>How to have a real conversation with AI — not just issue commands</li>
+            <li>Learning to ask for what you actually want (this is harder and more powerful than it sounds)</li>
+            <li>A few simple ideas for orienting yourself — how to think about context, how to let the conversation clarify what you're after, why speaking out loud often works better than typing</li>
             <li>A first look at building a simple life system grounded in your values and intentions</li>
-            <li>A live exploration together: you'll leave having experienced what this can actually do</li>
+            <li>A live exploration together: you'll leave having felt what this can actually do</li>
         </ul>
 
-        <p><strong>Between Sessions</strong></p>
-        <p style="margin-left: 1.2rem; font-style: italic; color: #5a5045; font-size: 1rem;">A simple homework: using what you learned, begin building a space that reflects your values, your intentions, and your life — somewhere you can return to and deepen over time.</p>
+        <p class="fade-up" style="margin-top: 2rem;"><strong>Between Sessions</strong></p>
+        <p class="fade-up" style="margin-left: 1.2rem; font-style: italic; color: #5a5045; font-size: 1.05rem;">A simple homework: using what you learned, begin building a space that reflects your values, your intentions, and your life — somewhere you can return to and deepen over time.</p>
 
-        <p><strong>Session 2: What Did You Notice?</strong></p>
-        <ul>
+        <p class="fade-up" style="margin-top: 2rem;"><strong>Session 2: What Did You Notice?</strong></p>
+        <ul class="fade-up">
             <li>We share what we built and what we noticed</li>
             <li>Troubleshoot together — the stuck places are where the learning lives</li>
             <li>How to keep going from here</li>
         </ul>
 
-        <blockquote>
+        <blockquote class="fade-up">
             <p>The goal isn't to become someone who's "good at AI." It's to find out whether this tool can support the life you're already trying to live.</p>
         </blockquote>
 
-        <h2>Who This Is For</h2>
+        <h2 class="fade-up">Who This Is For</h2>
 
-        <p>This course is for people who sense that AI might be relevant to their lives — but haven't found a way in that feels like them.</p>
+        <p class="fade-up">This course is for people who sense that AI might be relevant to their lives — but haven't found a way in that feels like them.</p>
 
-        <ul>
+        <ul class="fade-up">
             <li>Coaches, therapists, healers, and practitioners</li>
             <li>Writers and creative people</li>
             <li>Anyone doing meaningful work who wants more support, not more noise</li>
@@ -266,9 +386,9 @@
 
         <div class="divider"></div>
 
-        <h2>Investment</h2>
+        <h2 class="fade-up">Investment</h2>
 
-        <div class="pricing-block">
+        <div class="pricing-block fade-up">
             <div class="pricing-tier early-bird">
                 <div class="tier-label">
                     <div class="tier-name">Early Bird</div>
@@ -289,31 +409,54 @@
 
         <div class="divider"></div>
 
-        <h2>Your Guides</h2>
+        <h2 class="fade-up">Your Guides</h2>
 
         <div class="bios">
-            <div class="bio">
+            <div class="bio fade-up delay-1">
                 <div class="bio-name">Daniel Thorson</div>
                 <div class="bio-role">Writer · Coach · The Intimate Mirror</div>
                 <p>Daniel writes about meaning, transformation, and intimacy at the edge of a new world. He's built AI systems that support his coaching practice, writing life, and daily contemplative rhythm.</p>
             </div>
-            <div class="bio">
+            <div class="bio fade-up delay-2">
                 <div class="bio-name">Michal Tolk</div>
                 <div class="bio-role">Somatic Healer · Coach · Cries in the Wilderness</div>
                 <p>Michal is a somatic practitioner, spiritual counselor, and embodiment coach. She's built AI systems that support her practice, her creative life, and her commitment to living in sacred alignment.</p>
             </div>
         </div>
 
-        <div class="cta-section">
+        <div class="cta-section fade-up">
             <a href="https://buy.stripe.com/fZu5kD2tBgyzecN6LB0gw00" class="cta-btn">Reserve Your Spot — $350 Early Bird</a>
             <div class="price-note">Secure checkout via Stripe · Limited to 12 participants</div>
         </div>
 
     </div>
 
-    <div class="footer">
+    <div class="footer fade-up">
         <a href="https://danielthorson.substack.com">The Intimate Mirror</a> &nbsp;·&nbsp; <a href="https://criesinthewilderness.substack.com">Cries in the Wilderness</a>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.fade-up, .divider');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
