@@ -1,459 +1,915 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Values-Aligned AI — A Short Course with Daniel Thorson & Michal Tolk</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500;600&display=swap');
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html {
-            font-size: 16px; /* Baseline for rems */
-        }
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Values-Aligned AI — A Course with Daniel Thorson & Michal Tolk</title>
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+   <style>
+       :root {
+           --cream: #F5F0E8;
+           --warm-black: #1A1714;
+           --earth: #8B7355;
+           --earth-light: #B8A88A;
+           --sage: #7A8B6F;
+           --sage-light: #A3B396;
+           --clay: #C4956A;
+           --deep-brown: #3D3028;
+           --text-body: #4A4137;
+           --border: rgba(139, 115, 85, 0.2);
+       }
 
-        body {
-            background: #faf8f4;
-            color: #352f29; /* Slightly softer for reduced eye strain */
-            font-family: 'Lora', Georgia, serif;
-            font-weight: 400;
-            line-height: 1.65;
-            min-height: 100vh;
-            overflow-x: hidden;
-            
-            /* Typographic Polish */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
+       * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        ::selection {
-            background: #e8e0d0;
-            color: #1a1510;
-        }
+       html { scroll-behavior: smooth; }
 
-        /* --- Scroll Animation Classes --- */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1), 
-                        transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+       body {
+           font-family: 'DM Sans', sans-serif;
+           background: var(--cream);
+           color: var(--text-body);
+           line-height: 1.7;
+           font-weight: 300;
+           -webkit-font-smoothing: antialiased;
+       }
 
-        .delay-1 { transition-delay: 0.15s; }
-        .delay-2 { transition-delay: 0.3s; }
-        .delay-3 { transition-delay: 0.45s; }
-        .delay-4 { transition-delay: 0.6s; }
+       .serif { font-family: 'Cormorant Garamond', serif; }
 
-        /* --- Layout & Spacing --- */
-        .hero {
-            text-align: center;
-            padding: 9rem 2rem 5rem; /* Increased top padding for dramatic breathing room */
-            max-width: 720px;
-            margin: 0 auto;
-        }
-        
-        .eyebrow {
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 0.75rem;
-            letter-spacing: 0.16em; /* Slightly tighter for precision */
-            text-transform: uppercase;
-            color: #8a7a5a;
-            margin-bottom: 2rem; /* More space before heading */
-        }
-        
-        h1 {
-            font-size: 3rem; /* Slightly larger */
-            font-weight: 400;
-            line-height: 1.15; /* Tighter leading for large text */
-            letter-spacing: -0.02em; /* Editorial tracking */
-            color: #1a1510;
-            margin-bottom: 1.5rem;
-        }
-        
-        .subtitle {
-            font-style: italic;
-            font-size: 1.25rem; /* Larger for better hierarchy */
-            color: #6a5d4a;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-        
-        .divider {
-            width: 0px; 
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #c9a96e, transparent);
-            margin: 4rem auto; /* More macro whitespace */
-            transition: width 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;
-            opacity: 0;
-        }
-        .divider.visible {
-            width: 80px;
-            opacity: 1;
-        }
-        
-        .container {
-            max-width: 600px; /* Narrowed for optimal reading measure (65-75 chars) */
-            margin: 0 auto;
-            padding: 0 2rem 5rem;
-        }
-        
-        p { 
-            margin-bottom: 1.6rem; /* More space between paragraphs */
-            font-size: 1.125rem; /* Slightly larger body copy */
-        }
-        
-        strong { font-weight: 600; color: #1a1510; }
-        em { font-style: italic; }
-        
-        h2 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            line-height: 1.3;
-            letter-spacing: -0.01em;
-            margin-top: 5rem; /* Stronger separation of sections */
-            margin-bottom: 2rem;
-            color: #1a1510;
-        }
-        
-        .details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem; /* More internal breathing room */
-            margin: 4rem 0;
-            padding: 3rem; /* Expanded padding */
-            background: #f3efe8;
-            border-radius: 8px;
-        }
-        
-        .detail { text-align: center; }
-        .detail-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #8a7a5a;
-            margin-bottom: 0.6rem;
-        }
-        .detail-value { 
-            font-size: 1.125rem; 
-            color: #2a2520; 
-            font-weight: 500;
-        }
-        
-        ul {
-            margin: 2rem 0 2.5rem 1.2rem;
-            list-style: none;
-        }
-        ul li {
-            margin-bottom: 1rem; /* More space between list items */
-            font-size: 1.125rem;
-            padding-left: 1rem; /* More space between bullet and text */
-            position: relative;
-        }
-        ul li::before { 
-            content: "✧"; 
-            color: #c9a96e; 
-            position: absolute;
-            left: -1rem;
-            top: 0;
-        }
-        
-        blockquote {
-            border-left: 2px solid #c9a96e;
-            padding: 2rem 2.5rem; /* More immersive padding */
-            margin: 4rem 0;
-            font-size: 1.2rem; /* Make it a true pull-quote */
-            line-height: 1.5;
-            font-style: italic;
-            color: #4a4238;
-            background: #f5f0ea;
-            border-radius: 0 8px 8px 0;
-            transition: background 1.2s ease, border-color 1.2s ease;
-        }
-        blockquote:hover {
-            background: #fdfbf8;
-            border-left: 2px solid #b5955a;
-        }
-        blockquote p { margin-bottom: 0; font-size: inherit; } /* Override default p margins inside blockquote */
-        
-        .bios {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem; /* Wider gap between bios */
-            margin: 3rem 0;
-        }
-        .bio { text-align: center; }
-        .bio-name { font-size: 1.2rem; font-weight: 600; color: #1a1510; margin-bottom: 0.4rem; }
-        .bio-role { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #8a7a5a; margin-bottom: 1.2rem; }
-        .bio p { font-size: 1rem; line-height: 1.7; margin-bottom: 0; }
-        
-        .pricing-block {
-            margin: 2.5rem 0;
-            border: 1px solid #e8e0d0;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #faf8f4;
-        }
-        
-        .pricing-tier {
-            padding: 2.5rem 2rem; /* Taller pricing cards */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), 
-                        box-shadow 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                        background 0.8s ease;
-        }
-        .pricing-tier:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(201, 169, 110, 0.08);
-            z-index: 10;
-            position: relative;
-        }
-        .pricing-tier + .pricing-tier { border-top: 1px solid #e8e0d0; }
-        .pricing-tier.early-bird { background: #f5f0ea; }
-        .pricing-tier.early-bird:hover { background: #fdfbf8; }
-        .pricing-tier.full-price { background: #fdfbf8; }
-        .pricing-tier.full-price:hover { background: #ffffff; }
-        
-        .tier-label { font-family: 'Inter', sans-serif; }
-        .tier-name {
-            font-size: 1rem;
-            font-weight: 500;
-            color: #1a1510;
-            margin-bottom: 0.3rem;
-        }
-        .tier-window {
-            font-size: 0.8rem;
-            color: #8a7a5a;
-        }
-        .tier-price {
-            font-family: 'Lora', serif;
-            font-size: 1.6rem;
-            color: #c9a96e;
-        }
-        
-        .cta-section {
-            text-align: center;
-            padding: 4rem 0;
-        }
-        
-        .cta-btn {
-            display: inline-block;
-            padding: 1.1rem 3.5rem;
-            background: #3a3025;
-            color: #f5f0ea;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 0.85rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            transform: scale(1);
-        }
-        .cta-btn:hover { 
-            background: #c9a96e; 
-            color: #1a1510; 
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(58, 48, 37, 0.08);
-        }
-        .tier-btn { margin-top: 1rem; padding: 0.8rem 2rem; font-size: 0.8rem; }
-        
-        .price-note {
-            margin-top: 1.5rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            color: #8a7a5a;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem 5rem;
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-            color: #a09585;
-        }
-        .footer a { 
-            color: #8a6d3b; 
-            text-decoration: none; 
-            border-bottom: 1px solid transparent; 
-            padding-bottom: 2px;
-            transition: border-color 0.4s ease, color 0.4s ease;
-        }
-        .footer a:hover {
-            color: #1a1510;
-            border-bottom: 1px solid #c9a96e;
-        }
-        
-        @media (max-width: 640px) {
-            .hero { padding: 6rem 1.5rem 3rem; }
-            h1 { font-size: 2.4rem; }
-            .container { padding: 0 1.5rem 4rem; }
-            .details-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem; }
-            .bios { grid-template-columns: 1fr; gap: 4rem; }
-            .pricing-tier { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem 1.5rem; }
-            .tier-btn { margin-top: 0.5rem; }
-            blockquote { padding: 1.5rem 2rem; font-size: 1.1rem; }
-        }
-    </style>
+       /* STICKY NAV */
+       .sticky-nav {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           padding: 1.2rem 2rem;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           z-index: 1000;
+           background: transparent;
+           transition: all 0.4s ease;
+           pointer-events: none; /* Prevents clicking when invisible */
+       }
+
+       .sticky-nav.scrolled {
+           background: rgba(245, 240, 232, 0.92);
+           backdrop-filter: blur(8px);
+           -webkit-backdrop-filter: blur(8px);
+           border-bottom: 1px solid var(--border);
+           box-shadow: 0 4px 20px rgba(26, 23, 20, 0.03);
+           pointer-events: auto;
+       }
+
+       .nav-title {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.3rem;
+           font-weight: 500;
+           color: var(--warm-black);
+           opacity: 0;
+           transform: translateY(-10px);
+           transition: all 0.4s ease;
+       }
+
+       .sticky-nav.scrolled .nav-title {
+           opacity: 1;
+           transform: translateY(0);
+       }
+
+       .nav-btn {
+           font-family: 'DM Sans', sans-serif;
+           font-size: 0.75rem;
+           font-weight: 500;
+           letter-spacing: 0.1em;
+           text-transform: uppercase;
+           color: var(--cream);
+           background: var(--warm-black);
+           padding: 0.7rem 1.5rem;
+           text-decoration: none;
+           transition: all 0.3s ease;
+           opacity: 0;
+           transform: translateY(-10px);
+       }
+
+       .sticky-nav.scrolled .nav-btn {
+           opacity: 1;
+           transform: translateY(0);
+       }
+
+       .nav-btn:hover {
+           background: var(--deep-brown);
+           transform: translateY(-2px) !important;
+           box-shadow: 0 4px 12px rgba(26, 23, 20, 0.15);
+       }
+
+       /* HERO */
+       .hero {
+           min-height: 100vh;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           text-align: center;
+           padding: 4rem 2rem;
+           position: relative;
+           overflow: hidden;
+       }
+
+       .hero::before {
+           content: '';
+           position: absolute;
+           top: 0; left: 0; right: 0; bottom: 0;
+           background: 
+               radial-gradient(ellipse at 20% 50%, rgba(122, 139, 111, 0.08) 0%, transparent 60%),
+               radial-gradient(ellipse at 80% 30%, rgba(196, 149, 106, 0.06) 0%, transparent 50%),
+               radial-gradient(ellipse at 50% 80%, rgba(139, 115, 85, 0.05) 0%, transparent 60%);
+           pointer-events: none;
+       }
+
+       .hero-label {
+           font-size: 0.7rem;
+           letter-spacing: 0.3em;
+           text-transform: uppercase;
+           color: var(--earth);
+           margin-bottom: 2.5rem;
+           font-weight: 500;
+       }
+
+       .hero h1 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: clamp(2.8rem, 8vw, 5rem);
+           font-weight: 300;
+           color: var(--warm-black);
+           line-height: 1.1;
+           max-width: 700px;
+           margin-bottom: 2rem;
+       }
+
+       .hero h1 em {
+           font-style: italic;
+           color: var(--sage);
+       }
+
+       .hero-sub {
+           font-size: 1.1rem;
+           max-width: 520px;
+           color: var(--text-body);
+           margin-bottom: 3rem;
+           line-height: 1.8;
+       }
+
+       .hero-meta {
+           display: flex;
+           gap: 2.5rem;
+           font-size: 0.85rem;
+           color: var(--earth);
+           letter-spacing: 0.05em;
+           flex-wrap: wrap;
+           justify-content: center;
+       }
+
+       .hero-meta span {
+           display: flex;
+           align-items: center;
+           gap: 0.5rem;
+       }
+
+       .dot {
+           width: 4px;
+           height: 4px;
+           border-radius: 50%;
+           background: var(--earth-light);
+       }
+
+       /* SECTIONS */
+       section {
+           padding: 5rem 2rem;
+           max-width: 680px;
+           margin: 0 auto;
+       }
+
+       .section-divider {
+           width: 40px;
+           height: 1px;
+           background: var(--earth-light);
+           margin: 0 auto 3rem;
+       }
+
+       h2 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2rem;
+           font-weight: 400;
+           color: var(--warm-black);
+           margin-bottom: 1.5rem;
+       }
+
+       h3 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.4rem;
+           font-weight: 500;
+           color: var(--deep-brown);
+           margin-bottom: 1rem;
+           margin-top: 2.5rem;
+       }
+
+       p { margin-bottom: 1.2rem; }
+
+       /* THE SHIFT SECTION */
+       .shift-section {
+           background: var(--warm-black);
+           color: var(--cream);
+           max-width: none;
+           padding: 5rem 2rem;
+       }
+
+       .shift-inner {
+           max-width: 680px;
+           margin: 0 auto;
+       }
+
+       .shift-section h2 { color: var(--cream); }
+
+       .shift-section .section-divider { background: rgba(245, 240, 232, 0.2); }
+
+       .shift-section p { color: rgba(245, 240, 232, 0.8); }
+
+       .shift-grid {
+           display: grid;
+           grid-template-columns: repeat(3, 1fr);
+           gap: 2rem;
+           margin-top: 2.5rem;
+       }
+
+       .shift-item {
+           text-align: center;
+           padding: 1.5rem 1rem;
+           transition: transform 0.3s ease;
+       }
+       
+       .shift-item:hover { transform: translateY(-5px); }
+
+       .shift-icon {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.5rem;
+           font-weight: 300;
+           color: var(--clay);
+           margin-bottom: 0.8rem;
+           font-style: italic;
+       }
+
+       .shift-item h4 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.1rem;
+           font-weight: 500;
+           color: var(--cream);
+           margin-bottom: 0.5rem;
+       }
+
+       .shift-item p {
+           font-size: 0.85rem;
+           color: rgba(245, 240, 232, 0.6);
+           line-height: 1.6;
+       }
+
+       /* PULL QUOTE */
+       .pull-quote {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: clamp(1.2rem, 4vw, 1.5rem);
+           font-weight: 300;
+           font-style: italic;
+           color: var(--sage);
+           text-align: center;
+           padding: 3rem 2rem;
+           max-width: 600px;
+           margin: 2rem auto;
+           line-height: 1.5;
+           border-top: 1px solid var(--border);
+           border-bottom: 1px solid var(--border);
+       }
+
+       /* SESSION CARDS */
+       .session-card {
+           border: 1px solid var(--border);
+           padding: 2.5rem;
+           margin-bottom: 2rem;
+           background: rgba(255, 255, 255, 0.3);
+           transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+       }
+       
+       .session-card:hover {
+           transform: translateY(-3px);
+           background: rgba(255, 255, 255, 0.6);
+           box-shadow: 0 10px 30px rgba(139, 115, 85, 0.05);
+       }
+
+       .session-label {
+           font-size: 0.7rem;
+           letter-spacing: 0.25em;
+           text-transform: uppercase;
+           color: var(--earth);
+           font-weight: 500;
+           margin-bottom: 1rem;
+           display: block;
+       }
+
+       .session-card h3 { margin-top: 0; }
+
+       .session-card p {
+           font-size: 0.95rem;
+           color: var(--text-body);
+       }
+
+       .homework-card {
+           border-left: 3px solid var(--sage);
+           padding: 2rem 2.5rem;
+           background: rgba(122, 139, 111, 0.05);
+           margin: 2rem 0;
+           transition: background 0.3s ease;
+       }
+
+       .homework-card:hover { background: rgba(122, 139, 111, 0.08); }
+       .homework-card .session-label { color: var(--sage); }
+
+       /* FOR YOU IF */
+       .for-you {
+           background: rgba(139, 115, 85, 0.04);
+           max-width: none;
+           padding: 5rem 2rem;
+       }
+
+       .for-you-inner {
+           max-width: 680px;
+           margin: 0 auto;
+       }
+
+       .for-you-item {
+           padding: 1.2rem 0;
+           border-bottom: 1px solid var(--border);
+           font-size: 1.05rem;
+           transition: padding-left 0.3s ease;
+       }
+       
+       .for-you-item:hover {
+           padding-left: 10px;
+           color: var(--warm-black);
+       }
+
+       .for-you-item:last-child { border-bottom: none; }
+
+       /* GUIDES */
+       .guides {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 2.5rem;
+           margin-top: 2rem;
+       }
+
+       .guide { text-align: center; }
+
+       .guide-initial {
+           width: 96px;
+           height: 96px;
+           border-radius: 50%;
+           background: var(--warm-black);
+           color: var(--cream);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.5rem;
+           font-weight: 300;
+           margin: 0 auto 1rem;
+           overflow: hidden;
+       }
+       .guide-initial img {
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+           object-position: center top;
+       }
+
+       .guide h4 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.2rem;
+           font-weight: 500;
+           color: var(--warm-black);
+           margin-bottom: 0.5rem;
+       }
+
+       .guide p {
+           font-size: 0.85rem;
+           color: var(--earth);
+           line-height: 1.6;
+       }
+
+       /* CTA */
+       .cta-section {
+           text-align: center;
+           padding: 5rem 2rem;
+           max-width: 600px;
+           margin: 0 auto;
+       }
+
+       .cta-button {
+           display: inline-block;
+           font-family: 'DM Sans', sans-serif;
+           font-size: 0.85rem;
+           font-weight: 500;
+           letter-spacing: 0.15em;
+           text-transform: uppercase;
+           color: var(--cream);
+           background: var(--warm-black);
+           padding: 1.1rem 3rem;
+           text-decoration: none;
+           transition: all 0.3s ease;
+           margin-top: 1.5rem;
+       }
+
+       .cta-button:hover {
+           background: var(--deep-brown);
+           transform: translateY(-2px);
+           box-shadow: 0 8px 20px rgba(26, 23, 20, 0.15);
+       }
+
+       .cta-details {
+           margin-top: 2rem;
+           font-size: 0.85rem;
+           color: var(--earth);
+           display: flex;
+           justify-content: center;
+           flex-wrap: wrap;
+           gap: 0.5rem;
+       }
+
+       .cta-details span.separator {
+           display: inline-block;
+           margin: 0 0.3rem;
+       }
+
+       /* PRICING CARDS */
+       .pricing-grid {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 1.5rem;
+           margin-top: 2rem;
+           text-align: left;
+       }
+
+       .pricing-card {
+           border: 1px solid var(--border);
+           padding: 2rem;
+           background: rgba(255, 255, 255, 0.3);
+           transition: transform 0.3s ease, background 0.3s ease;
+       }
+
+       .pricing-card.featured {
+           border-color: var(--sage);
+           background: rgba(122, 139, 111, 0.06);
+       }
+
+       .pricing-card:hover {
+           transform: translateY(-3px);
+           background: rgba(255, 255, 255, 0.6);
+       }
+
+       .pricing-tag {
+           font-size: 0.68rem;
+           letter-spacing: 0.25em;
+           text-transform: uppercase;
+           font-weight: 500;
+           margin-bottom: 0.8rem;
+           display: block;
+       }
+
+       .pricing-card.featured .pricing-tag { color: var(--sage); }
+       .pricing-card:not(.featured) .pricing-tag { color: var(--earth); }
+
+       .pricing-price {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 2.8rem;
+           font-weight: 300;
+           color: var(--warm-black);
+           line-height: 1;
+           margin-bottom: 0.4rem;
+       }
+
+       .pricing-desc {
+           font-size: 0.82rem;
+           color: var(--earth);
+           margin-bottom: 1.5rem;
+           line-height: 1.5;
+       }
+
+       .pricing-btn {
+           display: block;
+           font-family: 'DM Sans', sans-serif;
+           font-size: 0.75rem;
+           font-weight: 500;
+           letter-spacing: 0.12em;
+           text-transform: uppercase;
+           text-align: center;
+           text-decoration: none;
+           padding: 0.9rem 1.5rem;
+           transition: all 0.3s ease;
+       }
+
+       .pricing-card.featured .pricing-btn {
+           color: var(--cream);
+           background: var(--warm-black);
+       }
+
+       .pricing-card.featured .pricing-btn:hover {
+           background: var(--deep-brown);
+           transform: translateY(-2px);
+           box-shadow: 0 6px 16px rgba(26, 23, 20, 0.15);
+       }
+
+       .pricing-card:not(.featured) .pricing-btn {
+           color: var(--warm-black);
+           border: 1px solid var(--warm-black);
+       }
+
+       .pricing-card:not(.featured) .pricing-btn:hover {
+           background: var(--warm-black);
+           color: var(--cream);
+           transform: translateY(-2px);
+       }
+
+
+       .pricing-card.dimmed {
+           opacity: 0.38;
+           pointer-events: none;
+       }
+       .pricing-card.dimmed:hover {
+           transform: none;
+           background: rgba(255, 255, 255, 0.3);
+       }
+       .pricing-deadline {
+           font-size: 0.72rem;
+           color: var(--clay);
+           letter-spacing: 0.06em;
+           text-transform: uppercase;
+           font-weight: 500;
+           margin-top: -0.2rem;
+           margin-bottom: 1.2rem;
+       }
+       .pricing-opens {
+           font-size: 0.72rem;
+           color: var(--earth-light);
+           letter-spacing: 0.06em;
+           text-transform: uppercase;
+           font-weight: 500;
+           margin-top: -0.2rem;
+           margin-bottom: 1.2rem;
+       }
+
+       .notify-section {
+           text-align: center;
+           padding: 3rem 2rem;
+           max-width: 480px;
+           margin: 0 auto;
+       }
+       .notify-section h3 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.4rem;
+           font-weight: 400;
+           color: var(--warm-black);
+           margin-bottom: 0.5rem;
+       }
+       .notify-section p {
+           font-size: 0.88rem;
+           color: var(--earth);
+           margin-bottom: 1.5rem;
+           line-height: 1.6;
+       }
+       @media (max-width: 640px) {
+           .pricing-grid {
+               grid-template-columns: 1fr;
+           }
+       }
+
+       /* FOOTER */
+       footer {
+           text-align: center;
+           padding: 3rem 2rem;
+           font-size: 0.75rem;
+           color: var(--earth-light);
+           border-top: 1px solid var(--border);
+       }
+
+       footer a {
+           color: var(--earth);
+           text-decoration: none;
+           transition: color 0.2s ease;
+       }
+       
+       footer a:hover { color: var(--warm-black); }
+
+       /* SCROLL ANIMATIONS */
+       .reveal {
+           opacity: 0;
+           transform: translateY(30px);
+           transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+       }
+
+       .reveal.active {
+           opacity: 1;
+           transform: translateY(0);
+       }
+
+       /* RESPONSIVE */
+
+       .notify-section {
+           text-align: center;
+           padding: 3rem 2rem;
+           max-width: 480px;
+           margin: 0 auto;
+       }
+       .notify-section h3 {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.4rem;
+           font-weight: 400;
+           color: var(--warm-black);
+           margin-bottom: 0.5rem;
+       }
+       .notify-section p {
+           font-size: 0.88rem;
+           color: var(--earth);
+           margin-bottom: 1.5rem;
+           line-height: 1.6;
+       }
+       @media (max-width: 640px) {
+           .sticky-nav {
+               padding: 1rem 1.5rem;
+           }
+           .nav-title {
+               font-size: 1.1rem;
+           }
+           .nav-btn {
+               padding: 0.6rem 1rem;
+               font-size: 0.7rem;
+           }
+           .hero-meta {
+               flex-direction: column;
+               gap: 0.8rem;
+               align-items: center;
+           }
+           .hero-meta .dot {
+               display: none; 
+           }
+           .shift-grid {
+               grid-template-columns: 1fr;
+               gap: 1.5rem;
+           }
+           .guides {
+               grid-template-columns: 1fr;
+               gap: 3rem;
+           }
+           section, .shift-section, .for-you, .cta-section {
+               padding: 4rem 1.5rem;
+           }
+           .session-card, .homework-card {
+               padding: 1.8rem 1.5rem;
+           }
+           .cta-details span.separator {
+               display: none;
+           }
+           .cta-details {
+               flex-direction: column;
+               gap: 0.5rem;
+           }
+       }
+
+       /* HERO ANIMATIONS */
+       @keyframes fadeUp {
+           from { opacity: 0; transform: translateY(20px); }
+           to { opacity: 1; transform: translateY(0); }
+       }
+
+       .hero > * { animation: fadeUp 0.8s ease-out both; }
+       .hero > *:nth-child(2) { animation-delay: 0.15s; }
+       .hero > *:nth-child(3) { animation-delay: 0.3s; }
+       .hero > *:nth-child(4) { animation-delay: 0.45s; }
+       .hero > *:nth-child(5) { animation-delay: 0.6s; }
+   </style>
 </head>
 <body>
 
-    <div class="hero fade-up">
-        <div class="eyebrow fade-up delay-1">A short course with Daniel Thorson & Michal Tolk</div>
-        <h1 class="fade-up delay-2">Values-Aligned AI</h1>
-        <div class="subtitle fade-up delay-3">Building systems that serve your life — not the other way around.</div>
-    </div>
+<nav class="sticky-nav" id="stickyNav">
+   <div class="nav-title">Values-Aligned AI</div>
+   <a href="#register" class="nav-btn">Reserve Seat</a>
+</nav>
 
-    <div class="divider"></div>
+<header class="hero">
+   <div class="hero-label">A two-session course</div>
+   <h1>Values-Aligned <em>AI</em></h1>
+   <p class="hero-sub">
+       There's important work for you to do in the world. AI can help you do it — both by making you more effective and by helping you get honest about what actually matters.
+   </p>
+   <div class="hero-meta">
+       <span>Daniel Thorson & Michal Tolk</span>
+       <span class="dot"></span>
+       <span>2 Sessions · April 8 &amp; 15</span>
+       <span class="dot"></span>
+       <span>Early Bird $350 · Full Price $450</span>
+   </div>
+</header>
 
-    <div class="container">
+<section class="reveal">
+   <div class="section-divider"></div>
+   <h2>Maybe AI isn't for you.</h2>
+   <p>That's what a lot of people think. That it's for tech people, or productivity obsessives, or people living a very different kind of life.</p>
+   <p>We thought that too, for a long time.</p>
+   <p>What changed wasn't a better app or a more impressive demo. It was discovering that if you learn to talk to AI in a particular way, it reflects back your own thinking with a kind of clarity that's hard to find elsewhere. It asks you questions. It helps you see what you actually believe. It takes the calling you feel in your bones and helps you break it down into something you can do <em>today</em>.</p>
+   <p>For coaches, healers, writers, and people doing meaningful work in the world, that turns out to matter a lot — for doing more of what matters most.</p>
+</section>
 
-        <p class="fade-up">Maybe you've heard a lot about AI and felt vaguely like it isn't for you. Like it's a tool for tech people, or productivity obsessives, or people with a very different kind of life than yours.</p>
+<div class="shift-section reveal">
+   <div class="shift-inner">
+       <div class="section-divider"></div>
+       <h2>What shifts</h2>
+       <p>This isn't a technical training. It's an orientation. You'll leave with a new relationship to these tools and to your own clarity.</p>
+       <div class="shift-grid">
+           <div class="shift-item">
+               <div class="shift-icon">1</div>
+               <h4>Confidence</h4>
+               <p>You'll have a way of working with AI that you can return to and deepen, grounded in principles rather than tricks that expire when the tools change.</p>
+           </div>
+           <div class="shift-item">
+               <div class="shift-icon">2</div>
+               <h4>Breadth</h4>
+               <p>You'll see the breadth of how AI can support your actual life: your time, your projects, your calling.</p>
+           </div>
+           <div class="shift-item">
+               <div class="shift-icon">3</div>
+               <h4>A foundation</h4>
+               <p>You'll leave with a concrete artifact: your values, vision, and projects. It becomes the basis for an ongoing relationship with AI that's aligned with what matters to you.</p>
+           </div>
+       </div>
+   </div>
+</div>
 
-        <p class="fade-up">We felt that way too, for a long time.</p>
+<div class="pull-quote reveal">
+   The goal isn't to become someone who's "good at AI." It's to find out whether this tool can support the life you're already trying to live.
+</div>
 
-        <p class="fade-up">What changed wasn't finding a better app or a more impressive demo. It was understanding the relationship between the tool and everything else that matters: your people, your body, the work you feel called to. That relational fabric is the actual ground. AI, held within it, can serve the life you're already living. Separated from it, it quietly erodes something real. Reality is relational. You already belong to it. This course is about learning to use these tools from inside that belonging — not at the expense of it.</p>
+<section class="reveal">
+   <div class="section-divider"></div>
+   <h2>What we'll do together</h2>
 
-        <p class="fade-up">This course is a gentle on-ramp. Two sessions, a small group, two guides who will walk in alongside you. No technical background required. No pressure to become an AI person. Just an honest exploration of whether this tool might support the life you're already trying to live.</p>
+   <div class="session-card">
+       <span class="session-label">Session One · Wednesday, April 8</span>
+       <h3>The View</h3>
+       <p>We'll begin by sharing a set of first principles for relating to AI: a way of being with these systems that stays useful no matter how fast the technology changes.</p>
+       <p>Then you'll practice. Using your voice (not typing), you'll have a real conversation with AI — one designed to surface what you actually care about, what you're trying to build, and what your next step might be. You'll feel it work. We'll come back together and talk about what happened.</p>
+   </div>
 
-        <div class="details-grid fade-up">
-            <div class="detail fade-up delay-1">
-                <div class="detail-label">Format</div>
-                <div class="detail-value">Two 90-minute sessions</div>
-            </div>
-            <div class="detail fade-up delay-2">
-                <div class="detail-label">Duration</div>
-                <div class="detail-value">Two weeks</div>
-            </div>
-            <div class="detail fade-up delay-3">
-                <div class="detail-label">Cohort</div>
-                <div class="detail-value">~12 people</div>
-            </div>
-            <div class="detail fade-up delay-4">
-                <div class="detail-label">Setting</div>
-                <div class="detail-value">Live on Zoom</div>
-            </div>
-        </div>
+   <div class="homework-card">
+       <span class="session-label">Between Sessions · April 8–15</span>
+       <p>Using what you learned, you'll begin building a space that reflects your values, your intentions, and the domains of your life you want to move forward. You'll have a robust PDF guide to walk you through it. This becomes the context that makes AI genuinely useful to <em>you</em> — not generically, but specifically.</p>
+   </div>
 
-        <h2 class="fade-up">What We'll Do Together</h2>
+   <div class="session-card">
+       <span class="session-label">Session Two · Wednesday, April 15</span>
+       <h3>What Did You Notice?</h3>
+       <p>We share what we built and what we noticed. The stuck places are where the learning lives — we'll troubleshoot together, model the kind of relationship to these systems that makes them most powerful, and talk about how to keep going from here.</p>
+   </div>
+</section>
 
-        <p class="fade-up"><strong>Session 1: Finding Your Way In</strong></p>
-        <ul class="fade-up">
-            <li>How to have a real conversation with AI — not just issue commands</li>
-            <li>A few simple principles for orienting yourself — how to think about context, how to let the conversation clarify what you're after, why speaking out loud often works better than typing</li>
-            <li>A first look at building a simple life system grounded in your values and intentions</li>
-            <li>A live exploration together: you'll leave having felt what this can actually do</li>
-        </ul>
+<div class="for-you reveal">
+   <div class="for-you-inner">
+       <div class="section-divider"></div>
+       <h2>This is for you if</h2>
+       <div class="for-you-item">You sense you have important work to do in the world, but you can't quite close the gap between the vision and the next step</div>
+       <div class="for-you-item">You've heard a lot about AI but haven't found a way in that feels like you</div>
+       <div class="for-you-item">You use AI for basic things but suspect there's something much deeper available</div>
+       <div class="for-you-item">You're a coach, healer, writer, or practitioner who wants more support and structure — without sacrificing your values</div>
+       <div class="for-you-item">You're curious but cautious — and you'd rather learn in good company</div>
+   </div>
+</div>
 
-        <p class="fade-up" style="margin-top: 2rem;"><strong>Between Sessions</strong></p>
-        <p class="fade-up" style="margin-left: 1.2rem; font-style: italic; color: #5a5045; font-size: 1.05rem;">A simple homework: using what you learned, begin building a space that reflects your values, your intentions, and your life — somewhere you can return to and deepen over time.</p>
+<section class="reveal">
+   <div class="section-divider"></div>
+   <h2>Your guides</h2>
+   <div class="guides">
+       <div class="guide">
+           <div class="guide-initial"><img src="/images/daniel.jpg" alt="Daniel Thorson"></div>
+           <h4>Daniel Thorson</h4>
+           <p>Writer, transformational coach, and contemplative practitioner with six years of monastic training and over 20,000 hours of meditation. Creator of The Intimate Mirror on Substack, writing about attachment, intimacy, and where inner work meets technology.</p>
+       </div>
+       <div class="guide">
+           <div class="guide-initial"><img src="/images/michal.jpg" alt="Michal Tolk" style="object-position: center 25%; transform: scale(1.8); transform-origin: center 25%;"></div>
+           <h4>Michal Tolk</h4>
+           <p>Somatic experiencing practitioner and writer behind Cries in the Wilderness. Michal brings an embodied, grounded approach to technology — her work moves between body, soul, and the structures we build to support both.</p>
+       </div>
+   </div>
+</section>
 
-        <p class="fade-up" style="margin-top: 2rem;"><strong>Session 2: What Did You Notice?</strong></p>
-        <ul class="fade-up">
-            <li>We share what we built and what we noticed</li>
-            <li>Troubleshoot together — the stuck places are where the learning lives</li>
-            <li>How to keep going from here</li>
-        </ul>
+<div class="cta-section reveal" id="register">
+   <div class="section-divider"></div>
+   <h2>Join us</h2>
+   <p>Two sessions. A small group. Two guides who will walk in alongside you. No technical background required. No pressure to become an AI person. Just an honest exploration of whether this tool can support the life you're already trying to live.</p>
+   <div class="pricing-grid">
+       <div class="pricing-card featured">
+           <span class="pricing-tag">Early Bird</span>
+           <div class="pricing-price">$350</div>
+           <p class="pricing-deadline">Ends March 15</p>
+           <p class="pricing-desc">A lower price for joining early.</p>
+           <a href="https://buy.stripe.com/fZu5kD2tBgyzecN6LB0gw00" class="pricing-btn">Reserve Early Bird Seat</a>
+       </div>
+       <div class="pricing-card dimmed">
+           <span class="pricing-tag">Full Price</span>
+           <div class="pricing-price">$450</div>
+           <p class="pricing-opens">Starting March 15</p>
+           <a href="https://buy.stripe.com/00w8wPc4b6XZc4F1rh0gw01" class="pricing-btn">Reserve Your Seat</a>
+       </div>
+   </div>
+   <div class="cta-details" style="margin-top: 1.5rem;">
+       <span>12 seats total</span>
+       <span class="separator">·</span>
+       <span>April 8 & 15, 2026</span>
+       <span class="separator">·</span>
+       <span>7:00–8:30 PM ET</span>
+       <span class="separator">·</span>
+       <span>Live on Zoom</span>
+   </div>
+</div>
 
-        <blockquote class="fade-up">
-            <p>The goal isn't to become someone who's "good at AI." It's to find out whether this tool can support the life you're already trying to live.</p>
-        </blockquote>
 
-        <h2 class="fade-up">Who This Is For</h2>
-
-        <p class="fade-up">This course is for people who sense that AI might be relevant to their lives — but haven't found a way in that feels like them.</p>
-
-        <ul class="fade-up">
-            <li>Coaches, therapists, healers, and practitioners</li>
-            <li>Writers and creative people</li>
-            <li>Anyone doing meaningful work who wants more support, not more noise</li>
-            <li>People who are curious but overwhelmed — and would rather learn in good company</li>
-        </ul>
-
-        <div class="divider"></div>
-
-        <h2 class="fade-up">Investment</h2>
-
-        <div class="pricing-block fade-up">
-            <div class="pricing-tier early-bird">
-                <div class="tier-label">
-                    <div class="tier-name">Early Bird</div>
-                    <div class="tier-window">First week of registration</div>
-                </div>
-                <div class="tier-price">$350</div>
-                <a href="https://buy.stripe.com/fZu5kD2tBgyzecN6LB0gw00" class="cta-btn tier-btn">Enroll — $350</a>
-            </div>
-            <div class="pricing-tier full-price">
-                <div class="tier-label">
-                    <div class="tier-name">Full Price</div>
-                    <div class="tier-window">Week two onwards</div>
-                </div>
-                <div class="tier-price">$450</div>
-                <a href="https://buy.stripe.com/00w8wPc4b6XZc4F1rh0gw01" class="cta-btn tier-btn">Enroll — $450</a>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <h2 class="fade-up">Your Guides</h2>
-
-        <div class="bios">
-            <div class="bio fade-up delay-1">
-                <div class="bio-name">Daniel Thorson</div>
-                <div class="bio-role">Writer · Coach · The Intimate Mirror</div>
-                <p>Daniel writes about meaning, transformation, and intimacy at the edge of a new world. He's built AI systems that support his coaching practice, writing life, and daily contemplative rhythm.</p>
-            </div>
-            <div class="bio fade-up delay-2">
-                <div class="bio-name">Michal Tolk</div>
-                <div class="bio-role">Somatic Healer · Coach · Cries in the Wilderness</div>
-                <p>Michal is a somatic practitioner, spiritual counselor, and embodiment coach. She's built AI systems that support her practice, her creative life, and her commitment to living in sacred alignment.</p>
-            </div>
-        </div>
-
-        <div class="cta-section fade-up">
-            <a href="https://buy.stripe.com/fZu5kD2tBgyzecN6LB0gw00" class="cta-btn">Reserve Your Spot — $350 Early Bird</a>
-            <div class="price-note">Secure checkout via Stripe · Limited to 12 participants</div>
-        </div>
-
-    </div>
-
-    <div class="footer fade-up">
-        <a href="https://danielthorson.substack.com">The Intimate Mirror</a> &nbsp;·&nbsp; <a href="https://criesinthewilderness.substack.com">Cries in the Wilderness</a>
-    </div>
-
+<div class=notify-section reveal>
+    <div class="section-divider"></div>
+    <h3>Not this round?</h3>
+    <p>If the timing doesn't work, subscribe below and we'll let you know when the next one opens.</p>
+    <form id="notify-form" style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+        <input type="email" name="email" placeholder="your@email.com" required
+            style="padding:0.75rem 1rem;border:1px solid var(--border);background:rgba(255,255,255,0.5);font-family:'DM Sans',sans-serif;font-size:0.85rem;color:var(--warm-black);outline:none;flex:1;min-width:200px;">
+        <button type="submit"
+            style="padding:0.75rem 1.5rem;background:var(--warm-black);color:var(--cream);font-family:'DM Sans',sans-serif;font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;">
+            Notify me
+        </button>
+    </form>
+    <p id="notify-thanks" style="display:none;font-size:0.85rem;color:var(--sage);margin-top:0.75rem;">Got it — we'll be in touch.</p>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px 0px -50px 0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            const animatedElements = document.querySelectorAll('.fade-up, .divider');
-            animatedElements.forEach(el => {
-                observer.observe(el);
+        document.getElementById('notify-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var email = this.querySelector('input[name=email]').value;
+            fetch('/subscribe', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'email=' + encodeURIComponent(email)
+            }).then(function(r) { return r.json(); }).then(function(d) {
+                if (d.ok) {
+                    document.getElementById('notify-form').style.display = 'none';
+                    document.getElementById('notify-thanks').style.display = 'block';
+                }
             });
         });
     </script>
+</div>
+
+<footer>
+   <p>
+       <a href="https://intimatemirror.substack.com">The Intimate Mirror</a> · <a href="https://criesinthewilderness.substack.com">Cries in the Wilderness</a>
+   </p>
+   <p style="margin-top: 0.5rem;">Daniel Thorson & Michal Tolk · Asheville, NC</p>
+</footer>
+
+<script>
+   // Lightweight scroll reveal animation
+   document.addEventListener('DOMContentLoaded', () => {
+       const reveals = document.querySelectorAll('.reveal');
+       
+       const revealOptions = {
+           threshold: 0.15,
+           rootMargin: "0px 0px -50px 0px"
+       };
+
+       const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   entry.target.classList.add('active');
+                   observer.unobserve(entry.target);
+               }
+           });
+       }, revealOptions);
+
+       reveals.forEach(reveal => {
+           revealOnScroll.observe(reveal);
+       });
+
+       // Sticky Nav visibility toggle
+       const nav = document.getElementById('stickyNav');
+       const hero = document.querySelector('.hero');
+       
+       window.addEventListener('scroll', () => {
+           // Show nav after scrolling past half the hero section
+           if (window.scrollY > (hero.offsetHeight / 2)) {
+               nav.classList.add('scrolled');
+           } else {
+               nav.classList.remove('scrolled');
+           }
+       });
+   });
+</script>
+
 </body>
 </html>
+
