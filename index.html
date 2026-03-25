@@ -329,6 +329,91 @@
        .homework-card .session-label { color: var(--sage); }
 
        /* FOR YOU IF */
+       /* READING CARDS */
+       .reading-outer {
+           background: var(--warm-black);
+           max-width: none;
+           padding: 5rem 2rem;
+       }
+       .reading-section {
+           max-width: 680px;
+           margin: 0 auto;
+           text-align: center;
+       }
+       .reading-outer .section-divider { background: rgba(245, 240, 232, 0.2); }
+       .reading-outer h2 { color: var(--cream); }
+       .reading-intro {
+           color: rgba(245, 240, 232, 0.6);
+           font-size: 0.95rem;
+           margin-bottom: 0;
+       }
+       .reading-cards {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 1.5rem;
+           margin-top: 2.5rem;
+           text-align: left;
+       }
+       .reading-card {
+           border: 1px solid rgba(245, 240, 232, 0.12);
+           border-radius: 4px;
+           overflow: hidden;
+           background: rgba(255,255,255,0.05);
+           text-decoration: none;
+           color: inherit;
+           display: block;
+           transition: box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
+       }
+       .reading-card:hover {
+           background: rgba(255,255,255,0.09);
+           transform: translateY(-2px);
+           box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+       }
+       .reading-card img {
+           width: 100%;
+           aspect-ratio: 16/9;
+           object-fit: cover;
+           display: block;
+           opacity: 0.88;
+       }
+       .reading-card-body { padding: 1.4rem 1.5rem 1.75rem; }
+       .reading-card-author {
+           font-family: 'DM Sans', sans-serif;
+           font-size: 0.7rem;
+           text-transform: uppercase;
+           letter-spacing: 0.12em;
+           color: var(--clay);
+           margin-bottom: 0.5rem;
+       }
+       .reading-card-title {
+           font-family: 'Cormorant Garamond', serif;
+           font-size: 1.15rem;
+           font-weight: 500;
+           color: var(--cream);
+           line-height: 1.3;
+           margin-bottom: 0.85rem;
+       }
+       .reading-card-quote {
+           font-size: 0.875rem;
+           color: rgba(245, 240, 232, 0.65);
+           line-height: 1.65;
+           margin-bottom: 1.1rem;
+           font-style: italic;
+       }
+       .reading-card-link {
+           font-family: 'DM Sans', sans-serif;
+           font-size: 0.72rem;
+           text-transform: uppercase;
+           letter-spacing: 0.1em;
+           color: var(--earth-light);
+           border-bottom: 1px solid rgba(184, 168, 138, 0.4);
+           padding-bottom: 1px;
+       }
+       @media (max-width: 600px) {
+           .reading-cards { grid-template-columns: 1fr; }
+           .reading-outer { padding: 3.5rem 1.5rem; }
+       }
+
        .for-you {
            background: rgba(139, 115, 85, 0.04);
            max-width: none;
@@ -344,12 +429,6 @@
            padding: 1.2rem 0;
            border-bottom: 1px solid var(--border);
            font-size: 1.05rem;
-           transition: padding-left 0.3s ease;
-       }
-       
-       .for-you-item:hover {
-           padding-left: 10px;
-           color: var(--warm-black);
        }
 
        .for-you-item:last-child { border-bottom: none; }
@@ -709,7 +788,7 @@
        <span class="dot"></span>
        <span>2 Sessions · April 8 &amp; 15</span>
        <span class="dot"></span>
-       <span>$450</span>
+       <span>Early Bird $350 · Full Price $450</span>
    </div>
 </header>
 
@@ -775,21 +854,39 @@
    </div>
 </section>
 
-<div class="for-you reveal">
-   <div class="for-you-inner">
+<div class="reading-outer reveal">
+   <div class="reading-section">
        <div class="section-divider"></div>
-       <h2>This is for you if</h2>
-       <div class="for-you-item">You sense you have important work to do in the world, but you can't quite close the gap between the vision and the next step</div>
-       <div class="for-you-item">You've heard a lot about AI but haven't found a way in that feels like you</div>
-       <div class="for-you-item">You use AI for basic things but suspect there's something much deeper available</div>
-       <div class="for-you-item">You're a coach, healer, writer, or practitioner who wants more support and structure — without sacrificing your values</div>
-       <div class="for-you-item">You're curious but cautious — and you'd rather learn in good company</div>
+       <h2>The thinking behind this course</h2>
+       <p class="reading-intro">Two pieces of writing that show where we're each coming from.</p>
+       <div class="reading-cards">
+           <a class="reading-card" href="https://intimatemirror.substack.com/p/the-human-alignment-problem" target="_blank" rel="noopener">
+               <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2c8b73d3-51b6-4491-931f-00d30faebc10_1536x1024.png" alt="The Human Alignment Problem" />
+               <div class="reading-card-body">
+                   <div class="reading-card-author">Daniel Thorson · The Intimate Mirror</div>
+                   <div class="reading-card-title">The Human Alignment Problem</div>
+                   <div class="reading-card-quote">"If the bottleneck is no longer intelligence but desire — if the limiting factor on the most powerful technology ever created is the quality of what we bring to it — then we are increasingly moving out of a technical conversation and into a spiritual one."</div>
+                   <span class="reading-card-link">Read the essay →</span>
+               </div>
+           </a>
+           <a class="reading-card" href="https://criesinthewilderness.substack.com/p/ai-and-your-souls-calling" target="_blank" rel="noopener">
+               <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6d4702e3-a97d-4bdb-aa74-4c8521a515a8_1024x1024.png" alt="AI & Your Soul's Calling" />
+               <div class="reading-card-body">
+                   <div class="reading-card-author">Michal Tolk · Cries in the Wilderness</div>
+                   <div class="reading-card-title">AI & Your Soul's Calling</div>
+                   <div class="reading-card-quote">"I still had to taste each word in my mouth and feel whether it was true. All of that was already alive in me. AI helped me find the shape of it, but the substance was mine."</div>
+                   <span class="reading-card-link">Read the essay →</span>
+               </div>
+           </a>
+       </div>
    </div>
 </div>
 
+
+
 <section class="reveal">
    <div class="section-divider"></div>
-   <h2>Your guides</h2>
+   <h2 style="text-align: center;">Your guides</h2>
    <div class="guides">
        <div class="guide">
            <div class="guide-initial"><img src="/images/daniel.jpg" alt="Daniel Thorson"></div>
@@ -804,6 +901,16 @@
    </div>
 </section>
 
+
+<section class="reveal">
+   <div class="section-divider"></div>
+   <div class="homework-card" style="border-left-color: var(--earth); background: rgba(139, 115, 85, 0.04);">
+       <span class="session-label" style="color: var(--earth);">A note on safe use</span>
+       <p>AI tools are genuinely useful. They can also pose real psychological risks — especially when used for extended, emotionally immersive self-exploration. Emerging research has documented cases in which prolonged chatbot use contributed to delusional thinking and psychological crisis, including in people with no prior psychiatric history.</p>
+       <p style="margin-bottom: 0;">This course teaches practical, bounded uses of AI in service to your work and life. We don't teach AI as a tool for therapy or deep psychological self-exploration. All participants receive a Safe Use Guide covering current research, warning signs, and protective practices. We ask that you review it before our first session.</p>
+   </div>
+</section>
+
 <div class="cta-section reveal" id="register">
    <div class="section-divider"></div>
    <h2>Join us</h2>
@@ -813,12 +920,14 @@
            <div class="pricing-price">$350</div>
            <p class="pricing-deadline">Closed</p>
            <p class="pricing-desc">Early bird pricing has ended.</p>
-           <a href="https://buy.stripe.com/fZu5kD2tBgyzecN6LB0gw00" class="pricing-btn">Reserve Early Bird Seat</a>
+           <a href="#" onclick="return false;" class="pricing-btn">Enrollment Closed</a>
        </div>
-       <div class="pricing-card featured">
+       <div class="pricing-card featured dimmed">
            <span class="pricing-tag">Full Price</span>
            <div class="pricing-price">$450</div>
-           <a href="https://buy.stripe.com/00w8wPc4b6XZc4F1rh0gw01" class="pricing-btn">Reserve Your Seat</a>
+           <p class="pricing-deadline">Closed</p>
+           <p class="pricing-desc">Enrollment is now full. Thank you.</p>
+           <a href="#" onclick="return false;" class="pricing-btn">Enrollment Closed</a>
        </div>
    </div>
    <div class="cta-details" style="margin-top: 1.5rem;">
